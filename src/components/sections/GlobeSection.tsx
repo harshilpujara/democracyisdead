@@ -1,33 +1,25 @@
+"use client";
+
 import { Section } from "@astryxdesign/core/Section";
 import { VStack } from "@astryxdesign/core/Stack";
-import { Center } from "@astryxdesign/core/Center";
 import { Heading } from "@astryxdesign/core/Heading";
 import { Text } from "@astryxdesign/core/Text";
-import { HalftoneField } from "@/components/texture/HalftoneField";
+import { useSupports } from "@/lib/supports/useSupports";
+import { useAnimatedNumber } from "@/lib/useAnimatedNumber";
+import { SupportGlobe } from "@/components/globe/SupportGlobe";
 
-/**
- * Phase 2: swap the dashed stub box below for the real WebGL globe, and
- * wire VOICE_COUNT up to the live tally. Everything else in this section —
- * copy, layout, the halftone backdrop — stays as-is.
- */
 export function GlobeSection() {
-  const VOICE_COUNT = 0;
+  const { supports, totalCount, recentlyAddedIds } = useSupports();
+  const animatedCount = useAnimatedNumber(totalCount);
 
   return (
     <Section variant="section" padding={0} className="globe-section">
       <VStack gap={10} hAlign="center">
-        <Center height={360} className="globe-stub">
-          <HalftoneField className="globe-stub__halftone" />
-          <Text type="code" color="secondary" className="globe-stub__label">
-            [ Globe Loads Here ]
-          </Text>
-        </Center>
+        <SupportGlobe supports={supports} recentlyAddedIds={recentlyAddedIds} />
 
-        <VStack gap={2} hAlign="center">
-          <Heading level={2} type="display-2" className="globe-counter">
-            {VOICE_COUNT.toLocaleString()} Voices And Counting
-          </Heading>
-        </VStack>
+        <Heading level={2} type="display-2" className="globe-counter">
+          {animatedCount.toLocaleString()} Voices And Counting
+        </Heading>
 
         <Text type="large" color="secondary" className="globe-copy">
           The map is filling up. Every dot is one person who refused to stay

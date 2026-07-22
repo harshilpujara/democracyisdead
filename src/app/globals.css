@@ -52,20 +52,6 @@ body {
 }
 
 /* ---------------------------------------------------------------------- */
-/* Texture: halftone dot field                                             */
-/* ---------------------------------------------------------------------- */
-
-.halftone-field {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.halftone-field__dot {
-  fill: var(--color-accent);
-}
-
-/* ---------------------------------------------------------------------- */
 /* Corner micro-labels                                                     */
 /* ---------------------------------------------------------------------- */
 
@@ -269,27 +255,21 @@ body {
   }
 }
 
-.globe-stub {
+.support-globe {
   position: relative;
   width: 100%;
-  max-width: 32rem;
-  aspect-ratio: 1;
+  max-width: 640px;
+  height: min(60vh, 520px);
+  min-height: 320px;
   margin-inline: auto;
-  border: 1px dashed var(--color-border-emphasized);
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: grab;
 }
 
-.globe-stub__halftone {
-  position: absolute;
-  inset: 0;
-  opacity: 0.5;
-}
-
-.globe-stub__label {
-  position: relative;
-  z-index: 1;
+.support-globe:active {
+  cursor: grabbing;
 }
 
 .globe-counter {
@@ -350,4 +330,60 @@ body {
   max-width: 34rem;
   text-align: center;
   margin-inline: auto;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Support flow                                                            */
+/* ---------------------------------------------------------------------- */
+
+.support-hero {
+  position: relative;
+  padding-inline: var(--spacing-5);
+  padding-block: clamp(3rem, 10vh, 6rem);
+}
+
+@media (min-width: 768px) {
+  .support-hero {
+    padding-inline: var(--spacing-10);
+  }
+}
+
+.support-headline {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: clamp(2.25rem, 9vw, 4.5rem);
+  line-height: 0.95;
+}
+
+.support-form {
+  width: 100%;
+}
+
+.support-submit {
+  width: 100%;
+}
+
+.first-in-city-badge {
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: var(--spacing-2) var(--spacing-4);
+}
+
+.confirmation {
+  width: 100%;
+  max-width: 32rem;
+}
+
+.confirmation .support-globe {
+  height: min(38vh, 320px);
+  min-height: 240px;
+  max-width: 360px;
+}
+
+.share-card-placeholder {
+  width: 100%;
+  border: 1px dashed var(--color-border-emphasized);
+  padding: var(--spacing-6);
 }

@@ -1,38 +1,56 @@
-import type { Metadata } from "next";
+"use client";
+
+import { useEffect, useState } from "react";
 import { VStack } from "@astryxdesign/core/Stack";
 import { Heading } from "@astryxdesign/core/Heading";
-import { Text } from "@astryxdesign/core/Text";
-import { Link } from "@astryxdesign/core/Link";
 import { TopBar } from "@/components/sections/TopBar";
 import { Footer } from "@/components/sections/Footer";
-
-export const metadata: Metadata = {
-  title: "Add Your Voice — Democracy Is Dead",
-};
+import { CornerLabel } from "@/components/texture/CornerLabel";
+import { SupportForm } from "@/components/support/SupportForm";
+import { SupportConfirmation } from "@/components/support/SupportConfirmation";
+import { getLocalSupport, type LocalSupportRecord } from "@/lib/supports/localVote";
 
 export default function SupportPage() {
+  const [record, setRecord] = useState<LocalSupportRecord | null | undefined>(undefined);
+  const [justSubmitted, setJustSubmitted] = useState(false);
+
+  useEffect(() => {
+    setRecord(getLocalSupport());
+  }, []);
+
   return (
     <>
       <TopBar />
       <main>
         <VStack
-          gap={6}
+          gap={10}
           hAlign="center"
-          minHeight="60dvh"
           justify="center"
-          className="hero"
+          minHeight="80dvh"
+          className="hero support-hero"
         >
-          <Heading level={1} type="display-2" className="inky-edge">
-            Add Your Voice
-          </Heading>
-          <Text type="large" color="secondary" className="hero-subhead">
-            The sign-up form for this movement is coming soon. Check back
-            shortly, or head back and share the map with someone who should
-            see it.
-          </Text>
-          <Link href="/" isStandalone>
-            Back to the movement
-          </Link>
+          <CornerLabel corner="top-left">Add Your Voice</CornerLabel>
+          <CornerLabel corner="top-right">No GPS &middot; No Faces &middot; No Email</CornerLabel>
+
+          {record === undefined ? null : record ? (
+            <SupportConfirmation record={record} isReturning={!justSubmitted} />
+          ) : (
+            <VStack gap={8} hAlign="center" width="100%" maxWidth={480}>
+              <Heading
+                level={1}
+                type="display-1"
+                className="hero-headline inky-edge-hero support-headline"
+              >
+                Add Your Voice.
+              </Heading>
+              <SupportForm
+                onSubmitted={(next) => {
+                  setJustSubmitted(true);
+                  setRecord(next);
+                }}
+              />
+            </VStack>
+          )}
         </VStack>
       </main>
       <Footer />
