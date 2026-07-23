@@ -22,18 +22,17 @@
     "@astryxdesign/core": "^0.1.7",
     "@astryxdesign/theme-neutral": "^0.1.7",
     "@supabase/supabase-js": "^2.110.8",
+    "cobe": "^0.6.4",
     "country-state-city": "^3.2.1",
+    "motion": "^12.42.2",
     "next": "^16.2.11",
     "react": "^19.2.8",
-    "react-dom": "^19.2.8",
-    "react-globe.gl": "^2.38.0",
-    "three": "^0.185.1"
+    "react-dom": "^19.2.8"
   },
   "devDependencies": {
     "@types/node": "^26.1.1",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
-    "@types/three": "^0.185.1",
     "playwright": "^1.61.1",
     "typescript": "^6.0.3"
   }
